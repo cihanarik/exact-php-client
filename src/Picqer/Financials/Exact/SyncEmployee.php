@@ -3,11 +3,11 @@
 namespace Picqer\Financials\Exact;
 
 /**
- * Class Employee.
+ * Class SyncEmployee.
  *
- * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=PayrollEmployees
+ * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=SyncPayrollEmployees
  *
- * @property string $ID Primary key
+ * @property int $Timestamp Timestamp
  * @property string $AddressLine2 Second address lineNote: The value is only returned if user has any of the following roles: View userEnter variable payroll mutationsManage employeesAnonymise employee and userView personal information Of employees
  * @property string $AddressLine3 Third address lineNote: The value is only returned if user has any of the following roles: View userEnter variable payroll mutationsManage employeesAnonymise employee and userView personal information Of employees
  * @property string $AddressStreet Street of addressNote: The value is only returned if user has any of the following roles: View userEnter variable payroll mutationsManage employeesAnonymise employee and userView personal information Of employees
@@ -37,6 +37,7 @@ namespace Picqer\Financials\Exact;
  * @property string $FullName Full name of the employee
  * @property string $Gender Gender
  * @property int $HID Numeric ID of the employee
+ * @property string $ID Primary key
  * @property string $Initials Initials
  * @property bool $IsActive IsActive
  * @property int $IsAnonymised Indicates whether the employee is anonymised.
@@ -71,12 +72,14 @@ namespace Picqer\Financials\Exact;
  * @property string $User User ID of employee
  * @property string $UserFullName Name of user
  */
-class Employee extends Model
+class SyncEmployee extends Model
 {
     use Query\Findable;
 
+    protected $primaryKey = 'Timestamp';
+
     protected $fillable = [
-        'ID',
+        'Timestamp',
         'AddressLine2',
         'AddressLine3',
         'AddressStreet',
@@ -106,6 +109,7 @@ class Employee extends Model
         'FullName',
         'Gender',
         'HID',
+        'ID',
         'Initials',
         'IsActive',
         'IsAnonymised',
@@ -141,5 +145,5 @@ class Employee extends Model
         'UserFullName',
     ];
 
-    protected $url = 'payroll/Employees';
+    protected $url = 'sync/Payroll/Employees';
 }

@@ -3,11 +3,11 @@
 namespace Picqer\Financials\Exact;
 
 /**
- * Class EmploymentContract.
+ * Class SyncEmploymentContract.
  *
- * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=PayrollEmploymentContracts
+ * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=SyncPayrollEmploymentContracts
  *
- * @property string $ID Primary key
+ * @property int $Timestamp Timestamp
  * @property int $ContractFlexPhase Flexible employment contract phase
  * @property string $ContractFlexPhaseDescription Flexible employment contract phase description.
  * @property string $Created Creation date
@@ -23,6 +23,7 @@ namespace Picqer\Financials\Exact;
  * @property string $Employment Employment ID
  * @property int $EmploymentNumber Employment number
  * @property string $EndDate End date of employment contract
+ * @property string $ID Primary key
  * @property string $Modified Last modified date
  * @property string $Modifier User ID of modifier
  * @property string $ModifierFullName Name of modifier
@@ -35,12 +36,14 @@ namespace Picqer\Financials\Exact;
  * @property int $Type Type of employment contract. 1 - Definite, 2 - Indefinite, 3 - External
  * @property string $TypeDescription Description of employment contract type
  */
-class EmploymentContract extends Model
+class SyncEmploymentContract extends Model
 {
     use Query\Findable;
 
+    protected $primaryKey = 'Timestamp';
+
     protected $fillable = [
-        'ID',
+        'Timestamp',
         'ContractFlexPhase',
         'ContractFlexPhaseDescription',
         'Created',
@@ -56,6 +59,7 @@ class EmploymentContract extends Model
         'Employment',
         'EmploymentNumber',
         'EndDate',
+        'ID',
         'Modified',
         'Modifier',
         'ModifierFullName',
@@ -69,5 +73,5 @@ class EmploymentContract extends Model
         'TypeDescription',
     ];
 
-    protected $url = 'payroll/EmploymentContracts';
+    protected $url = 'sync/Payroll/EmploymentContracts';
 }
